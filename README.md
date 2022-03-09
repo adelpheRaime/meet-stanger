@@ -1,8 +1,8 @@
-
 <p align="center">
-  <img style='width: 70%' alt="mett-stranger" src="./public/favicon.ico" />
-  <a href="https://adelphe-chat-app.herokuapp.com/conversation">Demo</a>
-  <img style='width: 70%' alt="mett-stranger" src="./public/demo.png" />
+  <img style='width: 100%' alt="mett-stranger" src="./public/demo.png" />
+</p>
+<p align="center" style="font-size:14px;">
+<a href="https://adelphe-chat-app.herokuapp.com/conversation">Demo</a>
 </p>
 
 >
@@ -12,20 +12,20 @@
 
 ## Features
  
--With Babel and webpack configuration 
--2 factors authentication for registration
--protection against csrf attack
--real time notification and message with socket io
+- With Babel and webpack configuration 
+- 2 factors authentication for registration
+- protection against csrf attack
+- real time notification and message with socket io
 
 ## Upcoming Features
 
--video chat
--chat room
--user following and followers 
--enhance the user settings
--user post
--test unitaire
--end-to-end test
+- video chat
+- chat room
+- user following and followers 
+- enhance the user settings
+- user post
+- test unitaire
+- end-to-end test
 
 ## Getting Started
 > 🚩 **Note**
