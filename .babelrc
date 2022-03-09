@@ -1,0 +1,23 @@
+{
+    //,"@babel/typescript"
+    "presets": [
+        "@babel/env",
+        "@babel/react"
+    ],
+    "plugins": [
+        "@babel/plugin-transform-runtime",
+        [
+            "babel-plugin-transform-imports",
+            {
+                "@mui/material": {
+                    "transform": "@mui/material/${member}",
+                    "preventFullImport": true
+                },
+                "lodash": {
+                    "transform": "lodash/${member}",
+                    "preventFullImport": true
+                }
+            }
+        ]
+    ]
+}
