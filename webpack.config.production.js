@@ -20,6 +20,7 @@ module.exports={
             template:"public/index.html",
             favicon:"public/favicon.ico"
         }),
+        //new BundleAnalyzer.BundleAnalyzerPlugin(),
         new BrotliPlugin({
             asset:'[path].br[query]',
             test:/\.(js|jsx|css|html|png|svg|jpe?g|gif|ico|woff|woff2|eot|ttf)$/,
@@ -33,6 +34,8 @@ module.exports={
         new Dotenv()
     ],
     optimization:{
+        moduleIds:"deterministic",
+        runtimeChunk:"single",
         minimize:false,
         splitChunks:{
             cacheGroups:{

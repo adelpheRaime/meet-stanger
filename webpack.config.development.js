@@ -1,7 +1,6 @@
 const webpack=require("webpack")
 const HtmlWebpackPlugin=require("html-webpack-plugin")
 const path = require("path")
-const BrotliPlugin=require("brotli-webpack-plugin")
 const BundleAnalyzer=require("webpack-bundle-analyzer")
 const Dotenv=require("dotenv-webpack")
 const port=process.env.PORT||3000
@@ -22,6 +21,7 @@ module.exports={
         }),
         
         new BundleAnalyzer.BundleAnalyzerPlugin(),
+        
         new Dotenv()
     ],
     optimization:{
