@@ -34,7 +34,7 @@
 
 ### Installation
 ```shell
-git clone https://github.com/adelpheRaime/meet-stanger.git
+git clone https://github.com/adelpheRaime/meet-stranger.git
 ```
 #### Backend
 ```shell
