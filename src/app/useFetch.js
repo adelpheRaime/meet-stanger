@@ -2,7 +2,6 @@ import * as React from "react";
 import Cookie from "universal-cookie";
 import {baseUrl} from "./baseUrl"
 const cookie = new Cookie();
-//initial state for tracker
 const initialState = {
   loading: false,
   error: false,

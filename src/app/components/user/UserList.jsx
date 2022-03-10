@@ -13,10 +13,8 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch"
 import styled from '@mui/material/styles/styled';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Badge from '@mui/material/Badge';
-import Dialogs from "../dialogs"
 import useFetch from "../../useFetch"
 import { useStates } from "from-react-context"
-import Profile from "../profile"
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#44b700',
@@ -55,10 +53,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const UserList = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate()
-  const searchValue = useRef()
   const [, setReceivedBy] = useStates("ReceivedBy")
+  const [, setProgress] = useStates("FileProgress")
   const [onlineUsers] = useStates("OnlineUsers")
-  const [Users, setUsers] = useState([])
+  const [Users, setUsers] = useStates("UserLists")
   const [, setIsDialogOpen] = useStates("IsDialogOpen")
   const [, setProfile] = useStates("Profile")
   const { send } = useFetch(`users/`, {
@@ -67,13 +65,6 @@ const UserList = () => {
       setUsers(data)
     }
   })
-  const { send: filter } = useFetch("users/filter", {
-    method: "POST",
-    onCompleted: (data) => {
-      setUsers(data)
-    }
-  })
-
   useEffect(() => {
     send()
   }, [])
@@ -81,33 +72,18 @@ const UserList = () => {
   function _setReceivedBy(e) {
     setReceivedBy(e)
     setIsDialogOpen(false)
+    setProgress(false)
     localStorage.setItem("_ftrd", e._id)
     navigate("/conversation")
   }
-  function _filter() {
-    filter({
-      ref: searchValue.current.value
-    })
-  }
+  
   function goToProfile(e) {
     setProfile(e)
     navigate("/users")
   }
   return (
     <div>
-      <Box display="flex" >
-        <IconButton>
-          <FontAwesomeIcon icon={faSearch} />
-        </IconButton>
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Search user"
-          inputRef={searchValue}
-          onChange={_filter}
-          inputProps={{ 'aria-label': 'search google maps' }}
-        />
-      </Box>
-      <div>
+      <div style={{marginTop:".5rem"}}>
         <List>
           {
             Users.length > 0 && Users.map((user, index) => (
@@ -139,13 +115,6 @@ const UserList = () => {
 
         </List>
       </div>
-      <Dialogs
-        open={open}
-        setOpen={setOpen}
-        ModalTitle="Profile"
-      >
-        <Profile />
-      </Dialogs>
     </div>
 
   )

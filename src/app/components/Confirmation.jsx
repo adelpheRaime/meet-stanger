@@ -12,6 +12,7 @@ import {socketUrl} from "../baseUrl"
 // ***********************************************************
 
 export default function Confirmation() {
+
     const { search } = useLocation()
     const query = new URLSearchParams(search)
     const id = query.get("tkn")

@@ -34,6 +34,7 @@ const Profile=() =>{
       {loadingProfile && <Loading />}
       {
         data&&(
+          <Box sx={{minHeight:"75vh",mt:"1rem",mb:"1.5rem"}}>
           <Card>
           <CardHeader
           avatar={
@@ -73,6 +74,7 @@ const Profile=() =>{
           </Typography>
         </CardContent>
         </Card>
+        </Box>
          ) }
          </>)
  }

@@ -1,63 +1,62 @@
 import * as React from 'react';
-import styled from '@mui/material/styles/styled';
+import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import IconButton from '@mui/material/IconButton';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose } from "@fortawesome/free-solid-svg-icons/faClose"
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-    maxHeight:"50vh"
-  },
-}));
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+export default function Dialogs({ children, open, setOpen, ModalTitle }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const resize=()=>{
+    let isResize=false
+    if(isMobile){
+      window.visualViewport.addEventListener("resize",()=>{
+        isResize=true
+      })
+    }
+    return isResize
+  }
 
-const BootstrapDialogTitle = (props) => {
-  const { children, onClose, ...other } = props;
-
-  return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-      {children}
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <FontAwesomeIcon icon={faClose} />
-        </IconButton>
-      ) : null}
-    </DialogTitle>
-  );
-};
-
-const Dialogs = ({ children, open, setOpen, ModalTitle }) => {
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
-    <>
-      <BootstrapDialog
-        onClose={setOpen}
-        aria-labelledby="dialog"
+    <div>
+      <Dialog
+        fullScreen={isMobile}
         open={open}
+        onClose={handleClose}
+        sx={{ '& .MuiDialog-paper': {overflowY:"auto",minWidth:resize()?"100vh":'auto', height:isMobile?"90vh":'85vh' } }}
+        aria-labelledby="responsive-dialog-title"
       >
-        <BootstrapDialogTitle id="dialog" onClose={handleClose}>
+        <DialogTitle id="responsive-dialog-title">
           {ModalTitle}
-        </BootstrapDialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <FontAwesomeIcon icon={faClose} />
+          </IconButton>
+        </DialogTitle>
         <DialogContent dividers>
-          {children}
+          <DialogContentText>
+            {children}
+          </DialogContentText>
         </DialogContent>
-      </BootstrapDialog>
-    </>
+      </Dialog>
+    </div>
   );
 }
 
-export default Dialogs

@@ -14,11 +14,13 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash"
 import useFetch from "../useFetch"
 import { Helmet } from 'react-helmet';
 import Dialogs from "./dialogs"
+import Search from "./search"
 import UserList from "./user/UserList"
 import { useStates } from "from-react-context"
 import { Link as RouterLInk, useNavigate } from 'react-router-dom';
 import  truncate  from "lodash/truncate"
 import Isloggedin from "../Isloggedin"
+
 const me = Isloggedin()
 // ***********************************************************
 //  here we can get and handle the inboxs message
@@ -163,7 +165,7 @@ export default function Inbox() {
         {((inbox.length === 0 && isInboxUpdated || !me) &&
           <Box display="flex" style={{ minHeight: "75vh" }} justifyContent="center" alignItems="center" alignColumn="center" flexDirection="column">
             <div style={{ width: "50%", textAlign: "center" }}>
-              <Typography variant="body1">You have not conversation yet.</Typography>
+              <Typography variant="body1">You inbox is empty!</Typography>
               <Button
                 style={{ marginTop: "1rem" }}
                 variant="contained"
@@ -177,7 +179,7 @@ export default function Inbox() {
         <Dialogs
           open={open}
           setOpen={setOpen}
-          ModalTitle="Stranger"
+          ModalTitle={<Search />}
         >
           <UserList />
         </Dialogs>

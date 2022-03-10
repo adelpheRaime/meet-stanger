@@ -22,19 +22,14 @@ const initialValues = {
   username: '',
   password: '',
 }
-// ***********************************************************
-//  simple registration with yup form client and express validator from server
-//  the validation is from validationSchema.js
-// ***********************************************************
-
 export default function Register() {
   const classes = useStyles()
   const navigate = useNavigate()
-  const [isConfirm, setIsConfirm] = useStates("isConfirm");
-  const { loading, data, error, send } = useFetch("auth/register", {
+  const { loading,error, send } = useFetch("auth/register", {
     method: "POST",
     onCompleted: (data) => {
       if (data) {
+        localStorage.removeItem("_ftrd")
         navigate(`/send/confirmation/${data.email}`)
       }
     }
@@ -61,11 +56,6 @@ export default function Register() {
       <Helmet>
         <title>Meet-Stranger | Register</title>
       </Helmet>
-      {isConfirm &&
-        <Flash state="isConfirm" severity="success">
-          Please confim your email to continue
-        </Flash>}
-
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

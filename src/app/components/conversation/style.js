@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     width: "50%",
     padding: ".5rem",
     margin: "1rem",
+    height:"auto"
   },
   receiving_container: {
     display: "flex",
@@ -18,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     width: "50%",
     padding: ".5rem",
     margin: "1rem",
+    height:"auto"
   },
   MsgContainer:{
     position:"relative",
@@ -26,7 +28,8 @@ const useStyles = makeStyles(theme => ({
     padding: "1rem", 
     width: "100%",
     overflowY: "auto",
-    height: "70vh" 
+    height: "70vh",
+    marginBottom:"1rem" 
   },
   MsgContainerJustify:{
     display:"flex",
@@ -42,7 +45,12 @@ const useStyles = makeStyles(theme => ({
     position:"absolute",
     top:0,
     right:0
+  },
+  cover:{
+    width:"100%",
+    objectFit:"cover"
   }
+  
 }));
 
 export default useStyles;

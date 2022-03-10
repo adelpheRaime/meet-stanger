@@ -22,11 +22,6 @@ const initialValues = {
   email: '',
   password: '',
 }
-// ***********************************************************
-//  simple login with yup form client and express validator from server
-//  the validation is from validationSchema.js
-// ***********************************************************
-
 const Login = () => {
   const classes = useStyles()
   const navigate = useNavigate()
@@ -39,6 +34,7 @@ const Login = () => {
       io(socketUrl, {
         auth: { token: data.token }
       })
+      localStorage.removeItem("_ftrd")
       window.location.assign("/")
     }
   })

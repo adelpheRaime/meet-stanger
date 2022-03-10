@@ -62,11 +62,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "1rem",
   },
 }));
-// ***********************************************************
-//  here we handle the inbox global state
-//  count only the viewed message from global state 
-//  
-// ***********************************************************
 
 const Navbar = () => {
   const classes = useStyles();
@@ -93,6 +88,7 @@ const Navbar = () => {
     onCompleted: (data) => {
       if (data) {
         socket.emit("end")
+        localStorage.removeItem("_ftrd")
         navigate("/login")
       }
     }

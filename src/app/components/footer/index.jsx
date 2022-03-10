@@ -18,6 +18,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import useTheme from '@mui/material/styles/useTheme';
 import Isloggedin from "../../Isloggedin"
 import { makeStyles } from '@mui/styles';
+import Search from "../search"
 import cloudinaryApi from "../../cloudinaryApi"
 const useStyles = makeStyles((theme) => ({
   attachFile: {
@@ -36,14 +37,6 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
-// ***********************************************************
-//  our footer is a bit different from the basic site because
-//  it contains the copyright element and the text input for sending message
-//  if the user is in conversation page the input is shown
-//  and if not the rest of footer element
-//
-// ***********************************************************
-
 export default function Footer() {
   const contentRef = useRef(null)
   const me = Isloggedin()
@@ -57,9 +50,9 @@ export default function Footer() {
   const [ReceivedBy] = useStates("ReceivedBy")
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [Message, setMessage] = useStates("Messages")
-  const [Progress, setProgress] = useState(false)
+  const [Progress, setProgress] = useStates("FileProgress")
   const [FilePath, setFilePath] = useState(null)
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useStates("IsDialogOpen");
   const [, setisFileUpload] = useStates("isFileUpload")
   const [isAuthorized, setisAuthorized] = useStates("FlashError")
 
@@ -139,7 +132,7 @@ export default function Footer() {
 
     if (FilePath) {
       const mimeType = FilePath.type.split("/")[0]
-      const authorizedFile = mimeType === "video" || mimeType === "image"
+      const authorizedFile = mimeType === "video" || mimeType === "image" || mimeType === "audio"
       if (FilePath.size > 16000000) {
         setProgress(false)
         setisFileUpload(true)
@@ -185,6 +178,13 @@ export default function Footer() {
         }
         setProgress(false)
 
+      }).catch(err=>{
+        setProgress(false)
+        setisAuthorized({
+          ...isAuthorized,
+          status: true,
+          message: "Sorry!uploading error"
+        })
       })
     }
   }, [FilePath])
@@ -254,7 +254,7 @@ export default function Footer() {
       <Dialogs
         open={open}
         setOpen={setOpen}
-        ModalTitle="Stranger"
+        ModalTitle={<Search />}
       >
         <UserList />
       </Dialogs>

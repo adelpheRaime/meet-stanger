@@ -16,11 +16,6 @@ import cloudinaryApi from "../../cloudinaryApi"
 import { useStates } from "from-react-context"
 import { Helmet } from 'react-helmet';
 import Loading from "../Loading"
-// ***********************************************************
-//  here is the user edit profilepage
-//  
-// ***********************************************************
-
 const EditProfile = () => {
   const classes = useStyles()
   const [User, setUser] = useStates("User");
@@ -95,7 +90,7 @@ const EditProfile = () => {
       {loadingProfile && <Loading />}
       {dataEdit && <Flash state="isEditProfile" severity="success">Change saved</Flash>}
       {error && <Flash state="isEditProfile" severity="error">{error.message}</Flash>}
-      <Box m={2} textAlign="center">
+      <Box sx={{minHeight:"75vh",mt:"1rem",mb:"1.5rem"}}>
         {data &&
           (<form onSubmit={handleSubmit} >
             <Card >

@@ -11,6 +11,7 @@ const store = {
     status: false,
     message: ""
   },
+  UserLists:[],
   Messages:[],
   FileProgress:false,
   isInboxUpdated: false,

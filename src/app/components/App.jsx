@@ -11,11 +11,16 @@ import Logo from "../Logo"
 import { socketUrl } from "../baseUrl"
 import Isloggedin from "../Isloggedin"
 import LoadImage from "../../../public/images/fountain.gif"
-//use dynamic import for root to reduce bundle size
+//use dynamic import for root to reduce user bandwitch
 const Root = lazy(() => import('../root'))
 const me = Isloggedin()
 const cookie = new Cookie()
 const token = cookie.get("_fXeTk") ? cookie.get("_fXeTk") : null
+// ***********************************************************
+//  socket instance
+//
+// ***********************************************************
+
 export const socket = io(socketUrl, {
     auth: { token: token }
 })

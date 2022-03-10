@@ -5,11 +5,12 @@ import { useStates } from "from-react-context"
 import Footer from "./footer"
 import Navbar from "./navbar"
 import Fab from '@mui/material/Fab';
-import Dialogs from "./dialogs"
-import { faSync } from "@fortawesome/free-solid-svg-icons/faSync"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAdd } from "@fortawesome/free-solid-svg-icons/faAdd"
-const UserList = lazy(() => import("./user/UserList"))
+import Dialogs from "./dialogs";
+import UserList from "./user/UserList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAdd } from "@fortawesome/free-solid-svg-icons/faAdd";
+import Search from "./search"
+
 const Container = styled('div')(
   ({ theme }) => ({
     minHeight: "100vh",
@@ -56,7 +57,7 @@ const MobileAddUser = styled('div')(
     },
     display: "none"
   }));
-// this is the simple build of layout output
+  // this is the simple build of layout output
 //  -----------------------------------
 // | logo                     menu     |
 // |___fixed appbar____________________|                                   |
@@ -67,8 +68,8 @@ const MobileAddUser = styled('div')(
 // |         |                         |
 // |         |                         |
 // |      Footer or text Input         |
-//  -----------------------------------
 const Layout = () => {
+  //const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const location = useLocation()
   const path = location.pathname.split("/")
   //exclude the navbar and footer component from layout if 
@@ -84,6 +85,7 @@ const Layout = () => {
             <Navbar />
             <Main>
               <LeftSide>
+                <Search />
                 <UserList />
               </LeftSide>
               <Feed>
@@ -107,26 +109,9 @@ const Layout = () => {
           <Dialogs
             open={IsDialogOpen}
             setOpen={setIsDialogOpen}
-            ModalTitle="Stranger"
+            ModalTitle={<Search />}
           >
-            <Suspense fallback={
-              <div
-                style={{
-                  width: "100%",
-                  height: "50vh",
-                  padding: "1rem",
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-              >
-                <FontAwesomeIcon icon={faSync} size={32} className="fa-spin" />
-              </div>
-            }>
-              <UserList />
-            </Suspense>
-
+            <UserList />
           </Dialogs>
         </>)
       }
