@@ -2,7 +2,7 @@
   <img style='width: 100%' alt="mett-stranger" src="./public/demo.png" />
 </p>
 <p align="center" style="font-size:14px;">
-<a href="https://adelphe-chat-app.herokuapp.com/conversation" target="_blank" >Demo</a>
+<a href="https://meet-stranger.alwaysdata.net" target="_blank" >Demo</a>
 </p>
 
 >
